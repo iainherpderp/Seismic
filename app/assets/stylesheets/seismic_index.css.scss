@@ -1,3 +1,115 @@
 // Place all the styles related to the seismic_index controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Respond-to mixin for easier responsive changes
+$break-small: 500px;
+$break-large: 1140px;
+@mixin respond-to($media) {
+  @if $media == small {
+    @media only screen and (max-width: $break-small) {
+      @content;
+    }
+  } @else if $media == medium {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) {
+      @content;
+    }
+  } @else if $media == wide {
+    @media only screen and (min-width: $break-large) {
+      @content;
+    }
+  }
+}
+
+body {
+  background-color: #252120;
+  color: #e5dfc6;
+}
+
+#wrapper {
+  max-width: 1140px;
+  height: 100%;
+  margin: 0 auto;
+  font-family: helvetica, verdana, arial, sans-serif;
+
+  a {
+    color: #6abed8;
+    text-decoration: none;
+    &:hover {
+      color: #7ce1ff;
+    }
+  }
+  #top-wrap {
+    margin-bottom: 20px;
+    #header {
+      text-align: center;
+      color: #a92f40;
+
+      h1 {
+        max-height: 10%;
+        line-height: 100%;
+        margin: 0;
+      }
+    }
+
+    #earthquakes {
+      max-width: 100%;
+      overflow: auto;
+      overflow-y: hidden;
+      height: auto;
+      white-space: nowrap;
+      table {
+        width: 100%;
+        background-color: #1d1917;
+        td {
+          padding: 0 10px;
+        }
+        thead tr {
+          text-align: left;
+          border-bottom: 3px solid #000000;
+        }
+        tbody {
+          max-height: 50px;
+          tr:nth-child(2n-1) {
+            background-color: #443b36;
+            td {
+              border-right: 1px solid #1d1917;
+            }
+          }
+          td {
+            border-right: 1px solid #443b36;
+          }
+        }
+      }
+    }
+    @include respond-to(small) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      margin-bottom: 0;
+      overflow: auto;
+      overflow-x: hidden;
+    }
+  }
+  #map-wrap {
+    height: 500px;
+    width: 100%;
+    #map-canvas {
+      height: 100%;
+    }
+
+    @include respond-to(small) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+    }
+    @include respond-to(medium) {
+      height: 400px;
+    }
+  }
+
+}
