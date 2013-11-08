@@ -62,7 +62,8 @@
         var mapOptions = {
             center: new google.maps.LatLng(57.1526,-2.11),
             zoom: 8,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
