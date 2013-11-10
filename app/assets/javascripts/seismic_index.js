@@ -15,6 +15,9 @@ function updateEarthquakes() {
 
     // Move map
     map.panTo(newLocation);
+
+    // Shake!
+    $('#wrapper').effect('shake', {times: 5, distance: 5});
 }
 
 $(function () {
