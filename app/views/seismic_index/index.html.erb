@@ -9,39 +9,25 @@
         <table>
             <thead>
                 <tr>
-                    <th><h4>Longitude</h4></th>
-                    <th><h4>Latitude</h4></th>
-                    <th><h4>Depth (km)</h4></th>
-                    <th><h4> Magnitude</h4></th>
-                    <th><h4> Location</h4></th>
-                    <th><h4>Updated</h4></th>
+                    <th>ID</th>
+                    <th>Coords</th>
+                    <th>Depth (km)</th>
+                    <th>Magnitude</th>
+                    <th>Location</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><h5>180.0</h5></td>
-                <td><h5>90.0</h5></td>
-                <td><h5>50</h5></td>
-                <td><h5>6</h5></td>
-                <td><h5>Aberdeen</h5></td>
-                <td><h5>05/10/2017 08:00-GMT</h5>
-            </tr>
-            <tr>
-                <td><h5>180.0</h5></td>
-                <td><h5>90.0</h5></td>
-                <td><h5>50</h5></td>
-                <td><h5>6</h5></td>
-                <td><h5>Aberdeen</h5></td>
-                <td><h5>05/10/2017 08:00-GMT</h5>
-            </tr>
-            <tr>
-                <td><h5>180.0</h5></td>
-                <td><h5>90.0</h5></td>
-                <td><h5>50</h5></td>
-                <td><h5>6</h5></td>
-                <td><h5>Aberdeen</h5></td>
-                <td><h5>05/10/2017 08:00-GMT</h5>
-            </tr>
+            <% @quake_data['features'].first(10).each  do |quake| %>
+                <tr>
+                    <td><%= quake['id'] %></td>
+                    <td><%= "(%s, %s)" % [quake['geometry']['coordinates'][0], quake['geometry']['coordinates'][1]]  %></td>
+                    <td><%= "%skm" % quake['geometry']['coordinates'][2] %></td>
+                    <td><%= quake['properties']['mag'] %></td>
+                    <td><%= quake['properties']['place'] %></td>
+                    <td><%= quake['properties']['time'] %></td>
+                </tr>
+            <% end %>
             </tbody>
         </table>
     </div>
@@ -56,7 +42,7 @@
 <script type="text/javascript">
     function initialize() {
         var mapOptions = {
-            center: new google.maps.LatLng(57.1526,-2.11),
+            center: new google.maps.LatLng(<%= @quake_data['features'][0]['geometry']['coordinates'][1] %>,<%= @quake_data['features'][0]['geometry']['coordinates'][0] %>),
             zoom: 8,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.TERRAIN

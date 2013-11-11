@@ -1,20 +1,11 @@
 class SeismicIndexController < ApplicationController
 
 	def index
+    @quake_data = getData('day')
 		if request.xhr?
-      data = getData('hour')
-			render :json => {:file_content => data}
+			render :json => {:file_content => @quake_data}
 			#@script.fileContent
-		end
-	end
-
-	def fileContent
-		#@script = Script.where(:script_file_name => params[:file_name]).first # file_name is the data key of Ajax request in view
-
-		if request.xhr?
-			render :json => {:file_content => "AJAX DATA"}
-			#@script.fileContent
-		end
+    end
 	end
 
 
