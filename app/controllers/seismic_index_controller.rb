@@ -2,7 +2,7 @@ class SeismicIndexController < ApplicationController
 
 	def index
 		if request.xhr?
-      data = getData('day')
+      data = getData('hour')
 			render :json => {:file_content => data}
 			#@script.fileContent
 		end
@@ -37,12 +37,13 @@ class SeismicIndexController < ApplicationController
 
   def getData(duration)
     getEarthquakes(duration)
-    length=@earthquakes_hash["features"].length
-    @print_string = ""
-    #------------------------------------------------------------test-------------------------------------------------------------------------------------------------------
-    for i in 0...length
-      @print_string = @print_string + @earthquakes_hash["features"][i]["properties"]["mag"].to_s + "\n"
-    end
+    return @earthquakes_hash
+    #length=@earthquakes_hash["features"].length
+    #@print_string = ""
+    ##------------------------------------------------------------test-------------------------------------------------------------------------------------------------------
+    #for i in 0...length
+    #  @print_string = @print_string + @earthquakes_hash["features"][i]["properties"]["mag"].to_s + "\n"
+    #end
     #------------------------------------------------------------test-------------------------------------------------------------------------------------------------------
     #@json_object = NET::HTTP.get_response("earthquake.usgs.gov","/earthquakes/feed/v1.0/summary/all_week.geojson")
   end
