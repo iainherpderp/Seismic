@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
   
 	validates_presence_of :password, :on => :create  
   
-	validates_presence_of :email  
-  
 	validates_uniqueness_of :email 
+	
+	validates :email, email_format: { message: "please enter a valid e-mail address!" }
 	
 	
 	def encrypt_password

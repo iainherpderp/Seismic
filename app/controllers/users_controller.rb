@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 	
 	def logout
 		session[:user_id] = nil
-		redirect_to :index , :notice => "Logged out!"
+		redirect_to '/' => "Logged out!"
 	end
 	  
 end
