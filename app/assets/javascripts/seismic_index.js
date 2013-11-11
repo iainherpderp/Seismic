@@ -25,3 +25,29 @@ $(function () {
         setInterval(updateEarthquakes, 5000)
     }
 );
+
+$(function() {
+    $(document).on("click", 'li', function () {
+        $.ajax({
+            url: "SeismicIndex#fileContent", // Route to the Script Controller method
+            type: "GET",
+            dataType: "text",
+            data: { file_name: $(this).text() }, // This goes to Controller in params hash, i.e. params[:file_name]
+            complete: function () {
+            },
+            success: function (data, textStatus, xhr) {
+                // Do something with the response here
+                console.log(data);
+                //editor.setValue(data.file_content) // Show the file contents in our editor.
+                // editor is defined somewhere above
+                // 'file_content' is the key we use to respond
+                // in the controller function below
+                var container = document.getElementById("document");
+                container.innerHTML = data;
+            },
+            error: function () {
+                alert("Ajax error!")
+            }
+        });
+    });
+});
