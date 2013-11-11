@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 	
+	before_filter :login_required, :only => :user_page
+	
 	def new
 	  
 		@user = User.new  
@@ -17,5 +19,47 @@ class UsersController < ApplicationController
 			
 		end  
 	end 
+	
+	def login
+		
+	end
+	
+	def process_login
+		user = User.authenticate(params[:username], params[:email], params[:password])  
+  
+		if user  
+    
+			session[:user_id] = user.id  
+    
+			redirect_to :my_account, :notice => "Logged in!"  
+    
+		else  
+   
+			flash.now.alert = "Invalid username, email or password"  
+   
+			render "login"  
+   
+		end  
+
+	end  
+  
+	def user_page
+     
+		if session[:user_id] != nil
+     
+			@sessName = User.find(session[:user_id]).username
+     
+		else
+      
+			@sessName = "Guest"
+      
+		end
+  
+	end
+	
+	def logout
+		session[:user_id] = nil
+		redirect_to :log_in , :notice => "Logged out!"
+	end
 	  
 end
