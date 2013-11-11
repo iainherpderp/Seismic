@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  username: MyString
-  password: MyString
+user:
+  username: test_user
+  password: 142eabe8fbb94452166f1077f5e5c44e8095458b66e16b1ccd863dc34217c94b # Digest::SHA2.hexdigest('user_pass')
   last_seen: 2013-11-09 22:39:43
   is_admin: false
 
-two:
-  username: MyString
-  password: MyString
+admin:
+  username: test_admin
+  password: fc618395b55f38756c9a98ec058c267830f84d448ca4e0b893951784b163b617 # Digest::SHA2.hexdigest('admin_pass')
   last_seen: 2013-11-09 22:39:43
-  is_admin: false
+  is_admin: true
