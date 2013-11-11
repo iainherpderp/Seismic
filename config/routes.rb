@@ -2,7 +2,6 @@ Seismic::Application.routes.draw do
 	
 	get "log_in" => "users#login", :as => "log_in"  
 	get "user_page" => "users#user_page", :as => "user_page"
-	get "log_out" => "users#logout", :as => "log_out"  
 	get "sign_up" => "users#new", :as => "sign_up"  
 	resources :users do 
 	  

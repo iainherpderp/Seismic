@@ -25,13 +25,13 @@ class UsersController < ApplicationController
 	end
 	
 	def process_login
-		user = User.authenticate(params[:username], params[:email], params[:password])  
+		user = User.authenticate(params[:username], params[:password])  
   
 		if user  
     
 			session[:user_id] = user.id  
     
-			redirect_to :my_account, :notice => "Logged in!"  
+			redirect_to :user_page, :notice => "Logged in!"  
     
 		else  
    
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 	
 	def logout
 		session[:user_id] = nil
-		redirect_to :log_in , :notice => "Logged out!"
+		redirect_to :index , :notice => "Logged out!"
 	end
 	  
 end
