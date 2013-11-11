@@ -1,0 +1,3 @@
+== Welcome to Seismic
+
+Here is the documentation for seismic!
