@@ -1,12 +1,20 @@
 <div id="top-wrap">
-	<a href="sign_up">Sign up</a>
-	<a href="log_in">Log in</a>
-	<a href="user_page">Your profile</a>
 
     <div id="header">
         <h1>Seismic Activity</h1>
     </div>
-
+    <div id="user-controls">
+        <% if @user %>
+            <span>Welcome back, <%= @user.username %></span>
+            <a href="user_page">Your profile</a>
+            <% if @user.isadmin %>
+                / <a href="admin">Admin</a>
+            <% end %>
+        <% else %>
+            <a href="sign_up">Sign up</a>
+            <a href="log_in">Log in</a>
+        <% end %>
+    </div>
 
     <div id="filter">
         <div id="auto-update" class="not-updating">
@@ -114,7 +122,7 @@
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
-        map = new google.maps.Map(document.getElementById("map-canvas"),
+        SEISMIC.map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
 
 
@@ -129,7 +137,7 @@
                                         when 7..10 then "huge"
                                     end
                                     %>.png",
-            map: map,
+            map: SEISMIC.map,
             title: "<%= quake['properties']['place'] %>"
         });
         <% end %>
@@ -138,9 +146,6 @@
 
 
     // Add last quake ID
-    lastQuakeID = "<%= if @latest_quake then @latest_quake['id'] end %>";
-    quakeData = '<%# @quake_data.to_s %>'
+    SEISMIC.lastQuakeID = "<%= if @latest_quake then @latest_quake['id'] end %>";
+    SEISMIC.quakeData = '<%# @quake_data.to_s %>'
 </script>
-<br />
-<br />
-	<a href="admin">Admin</a>
