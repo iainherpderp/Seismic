@@ -5,10 +5,10 @@
     </div>
     <div id="user-controls">
         <% if @user %>
-            <span>Welcome back, <%= @user.username %></span>
-            <a href="user_page">Your profile</a>
+            <span>Welcome back, <a href="user_page"><%= @user.username %></a></span>
+            / <a href="/log_out">logout</a>
             <% if @user.isadmin %>
-                / <a href="admin">Admin</a>
+                / <a href="admin">Administration</a>
             <% end %>
         <% else %>
             <a href="sign_up">Sign up</a>
@@ -26,6 +26,7 @@
             <span>
                 <a
                     id="duration-<%= duration %>"
+                    data-duration="<%= duration %>"
                     class="<%= if (params[:duration] == duration || params[:duration].nil? && duration == 'hour') then
                                   'active'
                                 end %>"
@@ -56,7 +57,7 @@
         </div>
     </div>
 
-    <div id="earthquakes">
+    <div id="earthquakes" class="earthquake-table">
         <table id="earthquakes-table">
             <thead>
                 <tr>

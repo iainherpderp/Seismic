@@ -96,7 +96,7 @@ body {
       }
     }
 
-    #earthquakes {
+    .earthquake-table {
       max-width: 100%;
       overflow: auto;
       overflow-y: hidden;
@@ -115,6 +115,7 @@ body {
         thead tr {
           text-align: left;
           border-bottom: 3px solid #000000;
+          min-hight: 1.5em;
         }
         tbody {
           max-height: 50px;

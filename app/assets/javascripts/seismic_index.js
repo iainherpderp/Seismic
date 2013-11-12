@@ -32,6 +32,32 @@ function updateEarthquakes(quakeData) {
         // Shake!
         $('#top-wrap').effect('shake', {times: 3, distance: 5});
 
+
+        for (var i = 0, len = quakeData.features.length; i < len; i++ ) {
+            q = quakeData.features[i];
+            if (q.id == SEISMIC.lastQuakeID) {
+                break;
+            }
+            position = new google.maps.LatLng(q.geometry.coordinates[1], q.geometry.coordinates[0]);
+            var mag;
+            if (q.properties.mag < 2 )
+                mag = 'small';
+            else if (q.properties.mag < 4.5)
+                mag = 'med';
+            else if (q.properties.mag < 7)
+                mag = 'large';
+            else if (q.properties.mag <= 10)
+                mag = 'huge';
+            else
+                mag = ''
+            var marker = new google.maps.Marker({
+                position: position,
+                icon: '/assets/icon-' + mag + '.png',
+                map: SEISMIC.map,
+                title: q.properties.title
+            });
+        }
+
         SEISMIC.lastQuakeID = latestQuake.id;
 
         console.log("New earthquakes!")
