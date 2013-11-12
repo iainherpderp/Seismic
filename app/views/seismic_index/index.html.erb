@@ -27,7 +27,7 @@
                 <a
                     id="duration-<%= duration %>"
                     data-duration="<%= duration %>"
-                    class="<%= if (params[:duration] == duration || params[:duration].nil? && duration == 'hour') then
+                    class="<%= if (params[:duration] == duration || params[:duration].nil? && duration == 'day') then
                                   'active'
                                 end %>"
                      href="?duration=<%= duration %><%= if params[:intensity] then
