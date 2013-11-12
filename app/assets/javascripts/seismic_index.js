@@ -50,6 +50,11 @@ function updateEarthquakes(quakeData) {
 >>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 }
 
+function rowClick() {
+    var loc = new google.maps.LatLng($(this).data('coords')[1], $(this).data('coords')[0]);
+    map.panTo(loc);
+}
+
 $(function () {
         // Set update to run every x seconds
 <<<<<<< HEAD
@@ -91,12 +96,11 @@ $(function() {
 
             // Reload ruby-formatted table (easier than JS formatting all the bits)
             $('#earthquakes').load('/ #earthquakes-table')
+
+            $('#earthquakes-table tbody tr').unbind('click').click(rowClick);
         });
 
-        $('#earthquakes-table tbody tr').unbind('click').click(function() {
-            var loc = new google.maps.LatLng($(this).data('coords')[1],$(this).data('coords')[0]);
-            map.panTo(loc);
-        });
+        $('#earthquakes-table tbody tr').click(rowClick);
     }
 );
 

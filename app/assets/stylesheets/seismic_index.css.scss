@@ -74,8 +74,14 @@ body {
         }
         tbody {
           max-height: 50px;
-          tr:nth-child(2n-1) {
-            background-color: #443b36;
+          tr {
+            cursor: pointer;
+            &:nth-child(2n-1) {
+              background-color: #443b36;
+            }
+            &:hover, &.active {
+              background-color: #887b74;
+            }
             td {
               border-right: 1px solid #1d1917;
             }
