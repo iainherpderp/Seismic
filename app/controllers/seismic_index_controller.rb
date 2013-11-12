@@ -8,6 +8,11 @@ def index
                     else
                       false;
                     end
+    unless session[:user_id].nil?
+      @user = User.find(session[:user_id])
+    else
+      @user = false;
+    end
   end
 
   def json
