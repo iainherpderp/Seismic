@@ -7,7 +7,47 @@
         <h1>Seismic Activity</h1>
     </div>
 
-    <button id="getQuakes">Check for new earthquakes</button>
+
+    <div id="filter">
+        <button id="getQuakes">Check for new earthquakes</button>
+        <div id="auto-update" class="not-updating">
+            <span>Auto update off</span>
+        </div>
+        <div id="duration">
+            <strong>Duration:</strong>
+            <% %w(hour day week month).each do |duration| %>
+            <span>
+                <a
+                    id="duration-<%= duration %>"
+                    class="<%= if (params[:duration] == duration || params[:duration].nil? && duration == 'hour') then
+                                  'active'
+                                end %>"
+                     href="?duration=<%= duration %><%= if params[:intensity] then
+                                                          "&intensity=" + params[:intensity]
+                                                        end %>">
+                    <%= duration %>
+                </a>
+            </span>
+            <% end %>
+        </div>
+        <div id="intensity">
+            <strong>Intensity:</strong>
+            <% %w(all 1.0 2.5 4.5 significant).each do |intensity| %>
+            <span>
+                <a
+                    id="intensity-<%= intensity %>"
+                    class="<%= if (params[:intensity] == intensity || params[:intensity].nil? && intensity == 'all') then
+                                'active'
+                              end %>"
+                   href="?intensity=<%= intensity %><%= if params[:duration] then
+                                                        "&duration=" + params[:duration]
+                                                      end %>">
+                    <%= intensity %>
+                </a>
+            </span>
+            <% end %>
+        </div>
+    </div>
 
     <div id="earthquakes">
         <table id="earthquakes-table">
@@ -21,7 +61,7 @@
             </thead>
             <tbody>
             <% if @latest_quake
-                 @quake_data['features'].first(10).each  do |quake| %>
+                 @quake_data['features'].first(15).each  do |quake| %>
                 <tr data-id="<%= quake['id'] %>" data-json="<%= quake.to_json %>" data-coords="<%= quake['geometry']['coordinates'] %>">
                     <%
                         size = ''
@@ -49,7 +89,7 @@
                 </tr>
             <%  end
                else %>
-            <tr><td colspan="4">Could not retreive earthquake data feed :(</td> </tr>
+            <tr><td colspan="4">There are no earthquakes matching your filter terms :(</td> </tr>
             <% end %>
             </tbody>
         </table>
@@ -79,10 +119,17 @@
                 mapOptions);
 
 
-        <% @quake_data['features'].first(10).each do |quake| %>
+        <% @quake_data['features'].first(15).each do |quake| %>
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(<%= "%s,%s" % [quake['geometry']['coordinates'][1], \
                                                         quake['geometry']['coordinates'][0]] %>),
+            icon: "/assets/icon-<%= case quake['properties']['mag']
+                                        when 0..2 then "small"
+                                        when 2..4.5 then "med"
+                                        when 4.5..7 then "large"
+                                        when 7..10 then "huge"
+                                    end
+                                    %>.png",
             map: map,
             title: "<%= quake['properties']['place'] %>"
         });
@@ -92,8 +139,8 @@
 
 
     // Add last quake ID
-    lastQuakeID = "<%= @latest_quake ||= '' %>";
-    quakeData = '<%= @quake_data.to_s %>'
+    lastQuakeID = "<%= @latest_quake['id'] ||= '' %>";
+    quakeData = '<%# @quake_data.to_s %>'
 </script>
 <br />
 <br />
