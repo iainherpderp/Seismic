@@ -4,21 +4,40 @@
     <h1>Hello <%= @sessName  %></h1>
     <h2>Welcome to the Admin page.</h2>
     
-	<table>
-	<thead>
-	<tr>
-	<th>Username</th>
-	<th>Email</th>
-	<th>Admin?</th>
-	</tr>
-	</thead>
-<<<<<<< HEAD
-	<td>Iain</td>
-	<td>iain.srbg@rrgtgt.sdafg</td>
-	<td>No</td>
-=======
-	<td>
->>>>>>> making_admins
-	</table>
 </div>
+</div>
+
+<div align="center">
+
+<table>
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Admin?</th>
+		</tr>
+	</thead>
+	
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= user.username %></td>
+			<td><%= user.email %></td>
+			<td>
+			<% if user.isadmin = TRUE%>
+				Yes
+			<% else %>
+				No
+			<% end %>
+			</td>
+			<td><%= link_to 'Show', user %></td>
+			<td><%= link_to 'Edit', edit_user_path(user) %></td>
+			<td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+</table>
+<br />
+<br />
+
+<a href="/"><button type='button'>Home</button></a>
 </div>

@@ -1,0 +1,23 @@
+ <p>
+ <strong>User:</strong>
+  
+  <%= @user.username %>
+</p>
+ 
+<p>
+  <strong>Email:</strong>
+  <%= @user.email%>
+</p>
+
+ <p>
+ <strong>Admin?:</strong>
+  
+<% if @user.isadmin = TRUE%>
+	Yes
+<% else %>
+	No
+<% end %>
+</p>
+
+<a href="/admin"><button type='button'>Back to Admin Page</button></a>
+<a href="/"><button type='button'>Home</button></a>

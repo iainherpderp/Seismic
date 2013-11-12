@@ -1,9 +1,8 @@
 class User < ActiveRecord::Base
-<<<<<<< HEAD
+
   attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin
-=======
-  attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin :as => :administrator
->>>>>>> making_admins
+
+  attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin, :as => :administrator
 
   attr_accessor :password, :password_confirmation
 
@@ -21,12 +20,9 @@ class User < ActiveRecord::Base
 
   validates :email, email_format: {message: "please enter a valid e-mail address!"}
   
-  
-  
 def isadmin?
 	username == "IainAdmin"
 end
-
 
   def encrypt_password
 
