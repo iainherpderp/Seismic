@@ -23,6 +23,6 @@ class UsersControllerTest < ActionController::TestCase
   
  test "logging out should set users id to nil" do
     get :logout
-    assert_nil :user_id
+    assert_nil session[:user_id]
   end
 end
