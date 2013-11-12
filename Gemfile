@@ -1,18 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
-<<<<<<< HEAD
-gem 'bcrypt-ruby', :require => 'bcrypt'
-=======
->>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
-<<<<<<< HEAD
-=======
   gem 'test-unit'
->>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
   gem 'sqlite3'
 end
 
@@ -34,10 +27,6 @@ end
 
 gem 'jquery-rails'
 
-<<<<<<< HEAD
-gem 'validates_email_format_of'
-=======
->>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
