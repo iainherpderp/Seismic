@@ -10,7 +10,7 @@ var lastQuakeID;
 function updateEarthquakes(quakeData) {
 
     // Get location of latest earthquake
-    var latestQuake = quakeData.file_content.features[0];
+    var latestQuake = quakeData.features[0];
 
     // Check if there are any new quakes, and move map etc if so.
     if (latestQuake.id != lastQuakeID) {
@@ -21,11 +21,15 @@ function updateEarthquakes(quakeData) {
         map.panTo(newLocation);
 
         // Shake!
-        $('#wrapper').effect('shake', {times: 5, distance: 5});
+        $('#top-wrap').effect('shake', {times: 3, distance: 5});
+
+        // Update table
+
 
         lastQuakeID = latestQuake.id;
     } else {
         // No new earthquakes to report
+        console.log("No new earthquakes.")
     }
 }
 
@@ -36,13 +40,21 @@ $(function () {
         // Run on clicking "get new quakes" button
         $('button#getQuakes').click(function() {
             getEarthquakes();
+
+            // Reload ruby-formatted table (easier than JS formatting all the bits)
+            $('#earthquakes').load('/ #earthquakes-table')
+        });
+
+        $('#earthquakes-table tbody tr').unbind('click').click(function() {
+            var loc = new google.maps.LatLng($(this).data('coords')[1],$(this).data('coords')[0]);
+            map.panTo(loc);
         });
     }
 );
 
 function getEarthquakes() {
     $.ajax({
-        url: "/", // Route to the Script Controller method
+        url: "/getearthquakes.json", // Route to the Script Controller method
         type: "GET",
         dataType: "json",
         success: function (data) {

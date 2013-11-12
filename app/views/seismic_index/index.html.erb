@@ -6,27 +6,46 @@
     <button id="getQuakes">Check for new earthquakes</button>
 
     <div id="earthquakes">
-        <table>
+        <table id="earthquakes-table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Coords</th>
-                    <th>Depth (km)</th>
                     <th>Magnitude</th>
                     <th>Location</th>
+                    <th>Depth (km)</th>
                     <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-            <% @quake_data['features'].first(10).each  do |quake| %>
-                <tr>
-                    <td><%= quake['id'] %></td>
-                    <td><%= "(%s, %s)" % [quake['geometry']['coordinates'][0], quake['geometry']['coordinates'][1]]  %></td>
-                    <td><%= "%skm" % quake['geometry']['coordinates'][2] %></td>
-                    <td><%= quake['properties']['mag'] %></td>
-                    <td><%= quake['properties']['place'] %></td>
-                    <td><%= quake['properties']['time'] %></td>
+            <% if @latest_quake
+                 @quake_data['features'].first(10).each  do |quake| %>
+                <tr data-id="<%= quake['id'] %>" data-json="<%= quake.to_json %>" data-coords="<%= quake['geometry']['coordinates'] %>">
+                    <%
+                        size = ''
+                        case quake['properties']['mag']
+                            when 0..2 then size="small"
+                            when 2..5 then size="med"
+                            when 5..7 then size="large"
+                            when 7..10 then size="huge"
+                        end
+                    %>
+                    <td class="magnitude <%= size %>">
+                        <span class="mag"><%= quake['properties']['mag'].to_s %><span class="scale"><%= quake['properties']['magType']  %></span></span>
+                    </td>
+                    <td class="place">
+                        <%= quake['properties']['place'] %>
+                        <br />
+                        <span class="sub-line"><%= "(%s, %s)" % [quake['geometry']['coordinates'][0], quake['geometry']['coordinates'][1]] %></span>
+                    </td>
+                    <td class="depth">
+                        <%= "%skm" % quake['geometry']['coordinates'][2] %>
+                    </td>
+                    <td class="time" title="<%= Time.at(quake['properties']['time'] / 1000) %>">
+                        <%= time_ago_in_words(Time.at(quake['properties']['time'] /1000).utc) %> ago
+                    </td>
                 </tr>
+            <%  end
+               else %>
+            <tr><td colspan="4">Could not retreive earthquake data feed :(</td> </tr>
             <% end %>
             </tbody>
         </table>
@@ -42,7 +61,12 @@
 <script type="text/javascript">
     function initialize() {
         var mapOptions = {
-            center: new google.maps.LatLng(<%= @quake_data['features'][0]['geometry']['coordinates'][1] %>,<%= @quake_data['features'][0]['geometry']['coordinates'][0] %>),
+            center: new google.maps.LatLng(<%= if @latest_quake
+                                                    "%s,%s" % [@latest_quake['geometry']['coordinates'][1], \
+                                                               @latest_quake['geometry']['coordinates'][0]]
+                                                else
+                                                    '57.1526,-2.11'
+                                                end %>),
             zoom: 8,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.TERRAIN
@@ -51,4 +75,8 @@
                 mapOptions);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+
+    // Add last quake ID
+    lastQuakeID = "<%= @latest_quake ||= '' %>";
+    quakeData = '<%= @quake_data.to_s %>'
 </script>

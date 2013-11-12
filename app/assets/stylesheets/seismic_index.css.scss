@@ -63,6 +63,10 @@ body {
         background-color: #1d1917;
         td {
           padding: 0 10px;
+          .sub-line {
+            font-style: italic;
+            font-size: 80%;
+          }
         }
         thead tr {
           text-align: left;

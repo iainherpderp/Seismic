@@ -1,42 +1,33 @@
 class SeismicIndexController < ApplicationController
-
-	def index
-    @quake_data = getData('day')
-		if request.xhr?
-			render :json => {:file_content => @quake_data}
-			#@script.fileContent
-    end
-	end
-
-
   require 'open-uri'
 
-  def getEarthquakes(duration)
-    case duration
-      when "month"
-        json_url = URI.encode("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson")
-      when "week"
-        json_url = URI.encode("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson")
-      when "day"
-        json_url = URI.encode("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-      when "hour"
-        json_url = URI.encode("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")
-    end
-
-    @earthquakes_hash = JSON.parse(open(json_url).read)
+	def index
+    @quake_data = getEarthquakes(params[:duration], params[:intensity])
+    @latest_quake = if @quake_data && @quake_data['metadata']['count'] != 0 && @quake_data['features'].any?
+                      @quake_data['features'][0]
+                    else
+                      false;
+                    end
   end
 
-  def getData(duration)
-    getEarthquakes(duration)
-    return @earthquakes_hash
-    #length=@earthquakes_hash["features"].length
-    #@print_string = ""
-    ##------------------------------------------------------------test-------------------------------------------------------------------------------------------------------
-    #for i in 0...length
-    #  @print_string = @print_string + @earthquakes_hash["features"][i]["properties"]["mag"].to_s + "\n"
-    #end
-    #------------------------------------------------------------test-------------------------------------------------------------------------------------------------------
-    #@json_object = NET::HTTP.get_response("earthquake.usgs.gov","/earthquakes/feed/v1.0/summary/all_week.geojson")
+  def json
+    @quake_data = getEarthquakes(params[:duration], params[:intensity])
+    render json: @quake_data
+  end
+
+  def getEarthquakes(duration, intensity)
+    # Default values
+    duration ||= 'day'
+    intensity ||= 'all'
+
+    # Check values of both are allowed
+    unless %w(hour day week month).include?(duration) && %w(all 1.0 2.5 4.5 significant).include?(intensity)
+      return false;
+    end
+
+    json_url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/%s_%s.geojson" % [intensity, duration]
+
+    return JSON.parse(open(json_url).read)
   end
 
 end
