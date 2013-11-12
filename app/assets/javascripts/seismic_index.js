@@ -3,33 +3,38 @@
 
 // Set global variable for map.
 // Global scope required to update from timeout.
-var map;
-var quakeData;
-var lastQuakeID;
-var autoUpdate = false;
+var SEISMIC = {};
+SEISMIC.map;
+SEISMIC.quakeData;
+SEISMIC.lastQuakeID;
+SEISMIC.autoUpdate = false;
 
 function updateEarthquakes(quakeData) {
 
     // Get location of latest earthquake
     var latestQuake = quakeData.features[0];
 
+    // Update table
+    // Reload ruby-formatted table (easier than JS formatting all the bits)
+    // Also useful for update human times
+    $('#earthquakes').load('/' + window.location.search + ' #earthquakes-table', function () {
+        $('#earthquakes-table tbody tr').unbind('click').click(rowClick);
+    })
+
     // Check if there are any new quakes, and move map etc if so.
-    if (latestQuake.id != lastQuakeID) {
+    if (latestQuake.id != SEISMIC.lastQuakeID) {
         // Set up new maps location
         var newLocation = new google.maps.LatLng(latestQuake.geometry.coordinates[1], latestQuake.geometry.coordinates[0]);
 
         // Move map
-        map.panTo(newLocation);
+        SEISMIC.map.panTo(newLocation);
 
         // Shake!
         $('#top-wrap').effect('shake', {times: 3, distance: 5});
 
-        // Update table
-        // Reload ruby-formatted table (easier than JS formatting all the bits)
-        $('#earthquakes').load('/' + window.location.search + ' #earthquakes-table')
-        $('#earthquakes-table tbody tr').unbind('click').click(rowClick);
+        SEISMIC.lastQuakeID = latestQuake.id;
 
-        lastQuakeID = latestQuake.id;
+        console.log("New earthquakes!")
     } else {
         // No new earthquakes to report
         console.log("No new earthquakes.")
@@ -43,24 +48,26 @@ function rowClick() {
 }
 
 function toggleAutoUpdate() {
-    if (autoUpdate) {
-        clearInterval(autoUpdate);
-        autoUpdate = false;
+    if (SEISMIC.autoUpdate) {
+        clearInterval(SEISMIC.autoUpdate);
+        SEISMIC.autoUpdate = false;
         $('#auto-update').removeClass("updating").addClass("not-updating").text('Auto update off');
     } else {
-        autoUpdate = setInterval(getEarthquakes, 30000)
-        if (autoUpdate) {
+        SEISMIC.autoUpdate = setInterval(getEarthquakes, 30000)
+        if (SEISMIC.autoUpdate) {
             $('#auto-update').removeClass("not-updating").addClass("updating").text('Auto update on');
         }
     }
 }
 
 $(function () {
-        // Set update to run every x seconds
-        toggleAutoUpdate();
-        $('#auto-update').click(toggleAutoUpdate);
+        if ($('#earthquakes-table').length) {
+            // Set update to run every x seconds
+            toggleAutoUpdate();
+            $('#auto-update').click(toggleAutoUpdate);
 
-        $('#earthquakes-table tbody tr').click(rowClick);
+            $('#earthquakes-table tbody tr').click(rowClick);
+        }
     }
 );
 

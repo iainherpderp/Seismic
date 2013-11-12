@@ -27,6 +27,7 @@ body {
 }
 
 #wrapper {
+  position: relative;
   max-width: 1140px;
   height: 100%;
   margin: 0 auto;
@@ -50,6 +51,16 @@ body {
         line-height: 100%;
         margin: 0;
       }
+      @include respond-to(small) {
+        margin-top: 1.5em;
+      }
+    }
+
+    #user-controls {
+      position: absolute;
+      text-align: right;
+      top: 0;
+      right: 0;
     }
 
     #filter {
