@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])  
       
 		if @user.save  
-			redirect_to :sign_up, :notice => "Signed up!"  
+			redirect_to :user_page, :notice => "Signed up!"  
 		else  
 			render "new"  
 			
@@ -21,8 +21,9 @@ class UsersController < ApplicationController
 	end 
 	
 	def login
-		
+
 	end
+	
 	
 	def process_login
 		user = User.authenticate(params[:username], params[:password])  
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
      
 		else
       
-			@sessName = "Guest"
+			redirect_to 'log_in'
       
 		end
   

@@ -4,6 +4,7 @@ Seismic::Application.routes.draw do
   get "user_page" => "users#user_page", :as => "user_page"
   get "log_out" => "users#logout", :as => "log_out"
   get "sign_up" => "users#new", :as => "sign_up"
+  get "admin" => "users#admin", :as => "admin"
   resources :users do
     post 'process_login', :on => :collection
   end
