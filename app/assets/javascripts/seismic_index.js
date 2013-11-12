@@ -85,17 +85,6 @@ function toggleAutoUpdate() {
     }
 }
 
-$(function () {
-        if ($('#earthquakes-table').length) {
-            // Set update to run every x seconds
-            toggleAutoUpdate();
-            $('#auto-update').click(toggleAutoUpdate);
-
-            $('#earthquakes-table tbody tr').click(rowClick);
-        }
-    }
-);
-
 function getEarthquakes() {
     $.ajax({
         url: "/getearthquakes.json", // Route to the Script Controller method
@@ -110,3 +99,23 @@ function getEarthquakes() {
         }
     });
 }
+
+// On page load...
+$(function () {
+        // Set up table auto-update
+        if ($('#earthquakes-table').length) {
+            // Set update to run every x seconds
+            toggleAutoUpdate();
+            $('#auto-update').click(toggleAutoUpdate);
+
+            $('#earthquakes-table tbody tr').click(rowClick);
+        }
+
+       // Set up filter change without reload
+        if ($('#filter').length) {
+            $('#duration a').click(function() {
+
+            })
+        }
+    }
+);

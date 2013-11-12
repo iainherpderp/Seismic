@@ -2,7 +2,9 @@ Seismic::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'seismicIndex#index'
+  root :to => 'seismic_index#index'
+
+  get 'index' => 'seismic_index#index'
 
   get "log_in" => "users#login", :as => "log_in"
   get "user_page" => "users#user_page", :as => "user_page"
@@ -13,7 +15,7 @@ Seismic::Application.routes.draw do
     post 'process_login', :on => :collection
   end
 
-  get '/getearthquakes.json' => 'seismicIndex#json'
+  get '/getearthquakes.json' => 'seismic_index#json'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
