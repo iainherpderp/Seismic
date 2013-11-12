@@ -1,7 +1,7 @@
 class SeismicIndexController < ApplicationController
   require 'open-uri'
 
-	def index
+def index
     @quake_data = getEarthquakes(params[:duration], params[:intensity])
     @latest_quake = if @quake_data && @quake_data['metadata']['count'] != 0 && @quake_data['features'].any?
                       @quake_data['features'][0]
