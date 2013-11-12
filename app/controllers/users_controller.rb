@@ -21,7 +21,13 @@ class UsersController < ApplicationController
 	end 
 	
 	def login
-
+		user = User.authenticate(params[:username], params[:password])  
+		
+		if session[:user_id] != nil
+			
+			redirect_to :user_page
+		end
+			
 	end
 	
 	
@@ -64,7 +70,11 @@ class UsersController < ApplicationController
 	end
 	
 	def admin
+<<<<<<< HEAD
 		@sessName = User.find(session[:user_id]).username
+=======
+		
+>>>>>>> making_admins
 	end
 	  
 end

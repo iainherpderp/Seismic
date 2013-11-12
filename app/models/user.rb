@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
+<<<<<<< HEAD
   attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin
+=======
+  attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin :as => :administrator
+>>>>>>> making_admins
 
   attr_accessor :password, :password_confirmation
 
