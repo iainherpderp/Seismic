@@ -1,5 +1,6 @@
 Seismic::Application.routes.draw do
 	
+<<<<<<< HEAD
 	get "log_in" => "users#login", :as => "log_in"  
 	get "user_page" => "users#user_page", :as => "user_page"
 	get "log_out" => "users#logout", :as => "log_out"
@@ -10,13 +11,18 @@ Seismic::Application.routes.draw do
  end
    
 
+=======
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 	resources :SeismicIndex do
 		
 		member do
 			get 'fileContent'
 		end
 	end
+<<<<<<< HEAD
 	
+=======
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 
 
   # The priority is based upon order of creation:

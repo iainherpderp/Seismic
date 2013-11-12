@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+<<<<<<< HEAD
   
 	def login_required
 		return true if User.find_by_id(session[:user_id])
@@ -12,3 +13,6 @@ class ApplicationController < ActionController::Base
 		redirect_to :log_in
     end
   end
+=======
+end
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57

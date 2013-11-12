@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+<<<<<<< HEAD
 
 	attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation
  
@@ -40,4 +41,7 @@ class User < ActiveRecord::Base
 		end   
 	end
   
+=======
+  attr_accessible :is_admin, :last_seen, :password, :username
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 end

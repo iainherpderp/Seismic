@@ -3,6 +3,7 @@
         <h1>Seismic Activity</h1>
     </div>
 
+<<<<<<< HEAD
     <div id="placeholder">
     <table>
       <tr> <th> <h3>***Placeholder Table***</h3></th></tr>
@@ -10,11 +11,15 @@
     </div>
 
     <li id="document">AJAX</li>
+=======
+    <button id="getQuakes">Check for new earthquakes</button>
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 
     <div id="earthquakes">
         <table>
             <thead>
                 <tr>
+<<<<<<< HEAD
                     <th><h4>Longitude</h4></th>
                     <th><h4>Latitude</h4></th>
                     <th><h4>Depth (km)</h4></th>
@@ -48,6 +53,27 @@
                 <td><h5>Aberdeen</h5></td>
                 <td><h5>05/10/2017 08:00-GMT</h5>
             </tr>
+=======
+                    <th>ID</th>
+                    <th>Coords</th>
+                    <th>Depth (km)</th>
+                    <th>Magnitude</th>
+                    <th>Location</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @quake_data['features'].first(10).each  do |quake| %>
+                <tr>
+                    <td><%= quake['id'] %></td>
+                    <td><%= "(%s, %s)" % [quake['geometry']['coordinates'][0], quake['geometry']['coordinates'][1]]  %></td>
+                    <td><%= "%skm" % quake['geometry']['coordinates'][2] %></td>
+                    <td><%= quake['properties']['mag'] %></td>
+                    <td><%= quake['properties']['place'] %></td>
+                    <td><%= quake['properties']['time'] %></td>
+                </tr>
+            <% end %>
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
             </tbody>
         </table>
     </div>
@@ -55,13 +81,21 @@
 <div id="map-wrap">
     <div id="map-canvas"></div>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkK_E20EoLgFlfyC-meqVhHSHmXUIYeM8&sensor=false">
 </script>
 <script type="text/javascript">
     function initialize() {
         var mapOptions = {
+<<<<<<< HEAD
             center: new google.maps.LatLng(57.1526,-2.11),
+=======
+            center: new google.maps.LatLng(<%= @quake_data['features'][0]['geometry']['coordinates'][1] %>,<%= @quake_data['features'][0]['geometry']['coordinates'][0] %>),
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
             zoom: 8,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.TERRAIN
@@ -70,8 +104,11 @@
                 mapOptions);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+<<<<<<< HEAD
 </script>
 <script type="text/javascript">
 
 
+=======
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
 </script>
