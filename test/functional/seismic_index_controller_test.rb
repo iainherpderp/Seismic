@@ -4,7 +4,7 @@ class SeismicIndexControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end	
-	test "should return a Hash" do
+	test "should set instanced variable @quakedata" do
 		get :index
 		assert_not_nil assigns(:quake_data)
 
