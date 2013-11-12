@@ -2,14 +2,13 @@
 	<a href="sign_up">Sign up</a>
 	<a href="log_in">Log in</a>
 	<a href="user_page">Your profile</a>
-	
+
     <div id="header">
         <h1>Seismic Activity</h1>
     </div>
 
 
     <div id="filter">
-        <button id="getQuakes">Check for new earthquakes</button>
         <div id="auto-update" class="not-updating">
             <span>Auto update off</span>
         </div>
@@ -139,7 +138,7 @@
 
 
     // Add last quake ID
-    lastQuakeID = "<%= @latest_quake['id'] ||= '' %>";
+    lastQuakeID = "<%= if @latest_quake then @latest_quake['id'] end %>";
     quakeData = '<%# @quake_data.to_s %>'
 </script>
 <br />

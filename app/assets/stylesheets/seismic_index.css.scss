@@ -59,6 +59,7 @@ body {
       #auto-update {
         cursor: pointer;
         &.updating {
+          color: #6abed8;
           background: url(/assets/updating.gif) right no-repeat;
           padding-right: 24px;
         }
