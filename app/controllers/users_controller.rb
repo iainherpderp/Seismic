@@ -59,7 +59,15 @@ class UsersController < ApplicationController
 	
 	def logout
 		session[:user_id] = nil
-		redirect_to '/' => "Logged out!"
+		redirect_to '/'
+	end
+	
+	def admin
+		if current_user.try( :admin? )
+			redirect to 'admin'
+		else
+			flash.now.alert = "You do not have permission to access this page!"  
+		end
 	end
 	  
 end
