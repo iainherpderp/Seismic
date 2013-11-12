@@ -6,6 +6,6 @@ class UserTest < ActiveSupport::TestCase
   # end
   test "should not save user without password" do
     post = User.new
-    assert !User.save, "Saved the user without a password"
+    assert !post.save, "Saved the user without a password"
   end
 end
