@@ -7,7 +7,7 @@
         <% if @user %>
             <span>Welcome back, <a href="user_page"><%= @user.username %></a></span>
             / <a href="/log_out">logout</a>
-            <% if @user.isadmin %>
+            <% if @user.isadmin? %>
                 / <a href="admin">Administration</a>
             <% end %>
         <% else %>
