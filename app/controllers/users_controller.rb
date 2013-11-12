@@ -18,12 +18,6 @@ class UsersController < ApplicationController
 			render "new"  
 			
 		end  
-		
-		if user.username="IainAdmin"
-			isadmin==TRUE
-		else
-			isadmin==FALSE
-		end
 	end 
 	
 	def login
