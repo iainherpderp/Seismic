@@ -21,7 +21,13 @@ class UsersController < ApplicationController
 	end 
 	
 	def login
-
+		user = User.authenticate(params[:username], params[:password])  
+		
+		if session[:user_id] != nil
+			
+			redirect_to :user_page
+		end
+			
 	end
 	
 	
@@ -64,11 +70,7 @@ class UsersController < ApplicationController
 	end
 	
 	def admin
-		if current_user.try( :admin? )
-			redirect to 'admin'
-		else
-			flash.now.alert = "You do not have permission to access this page!"  
-		end
+		
 	end
 	  
 end

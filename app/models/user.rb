@@ -15,8 +15,18 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
 
-  validates :email, email_format: {message: "please enter a valid e-mail address!"}
+  validates :email, email_format: {message: "Please enter a valid e-mail address!"}
 
+
+def set_initial_admin
+	   
+		if :username =="IainAdmin"
+			isadmin = TRUE
+		else
+			isadmin = FALSE
+		end
+		
+end
 
   def encrypt_password
 
