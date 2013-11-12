@@ -5,9 +5,11 @@ class SeismicIndexControllerTest < ActionController::TestCase
   #   assert true
   # end	
 	test "should return a Hash" do
-		get "/"
-		assert_response :success
-		assert @quake_data.class == "Hash", "did not not return a Hash: #{@quake_data.class}"
+		get :index
+		assert_not_nil assigns(:quake_data)
+
+		#assert_response :success
+		assert :quake_data.class == "Hash", "did not not return a Hash: #{:quake_data.class}"
 	end
   
 	
