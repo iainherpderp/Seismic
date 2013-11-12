@@ -52,6 +52,38 @@ body {
       }
     }
 
+    #filter {
+      text-align: right;
+      margin: 10px auto;
+
+      #auto-update {
+        cursor: pointer;
+        &.updating {
+          background: url(/assets/updating.gif) right no-repeat;
+          padding-right: 24px;
+        }
+        &.not-updating {
+          background: url(/assets/not-updating.gif) right no-repeat;
+          padding-right: 24px;
+        }
+      }
+
+      #duration, #intensity {
+        a {
+          color: #bbb;
+          &.active {
+            color: #7ce1ff;
+          }
+          &:before {
+            content: "•";
+          }
+        }
+        span:first-of-type a:before {
+          content: "";
+        }
+      }
+    }
+
     #earthquakes {
       max-width: 100%;
       overflow: auto;

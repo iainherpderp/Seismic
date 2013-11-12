@@ -6,6 +6,7 @@
 var map;
 var quakeData;
 var lastQuakeID;
+var autoUpdate = false;
 
 function updateEarthquakes(quakeData) {
 
@@ -24,7 +25,9 @@ function updateEarthquakes(quakeData) {
         $('#top-wrap').effect('shake', {times: 3, distance: 5});
 
         // Update table
-
+        // Reload ruby-formatted table (easier than JS formatting all the bits)
+        $('#earthquakes').load('/' + window.location.search + ' #earthquakes-table')
+        $('#earthquakes-table tbody tr').unbind('click').click(rowClick);
 
         lastQuakeID = latestQuake.id;
     } else {
@@ -38,19 +41,23 @@ function rowClick() {
     map.panTo(loc);
 }
 
+function toggleAutoUpdate() {
+    if (autoUpdate) {
+        clearInterval(autoUpdate);
+        autoUpdate = false;
+        $('#auto-update').removeClass("updating").addClass("not-updating").text('Auto update off');
+    } else {
+        autoUpdate = setInterval(getEarthquakes, 30000)
+        if (autoUpdate) {
+            $('#auto-update').removeClass("not-updating").addClass("updating").text('Auto update on');
+        }
+    }
+}
+
 $(function () {
         // Set update to run every x seconds
-        //setInterval(getEarthquakes, 5000)
-
-        // Run on clicking "get new quakes" button
-        $('button#getQuakes').click(function() {
-            getEarthquakes();
-
-            // Reload ruby-formatted table (easier than JS formatting all the bits)
-            $('#earthquakes').load('/ #earthquakes-table')
-
-            $('#earthquakes-table tbody tr').unbind('click').click(rowClick);
-        });
+        toggleAutoUpdate();
+        $('#auto-update').click(toggleAutoUpdate);
 
         $('#earthquakes-table tbody tr').click(rowClick);
     }
