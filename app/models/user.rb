@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation
+  attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin
 
   attr_accessor :password, :password_confirmation
 
@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   validates :email, email_format: {message: "please enter a valid e-mail address!"}
+  
+  
+  
+def isadmin?
+	username == "IainAdmin"
+end
 
 
   def encrypt_password

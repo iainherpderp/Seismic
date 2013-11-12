@@ -64,11 +64,7 @@ class UsersController < ApplicationController
 	end
 	
 	def admin
-		if current_user.try( :admin? )
-			redirect to 'admin'
-		else
-			flash.now.alert = "You do not have permission to access this page!"  
-		end
+		@sessName = User.find(session[:user_id]).username
 	end
 	  
 end
