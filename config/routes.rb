@@ -1,4 +1,19 @@
 Seismic::Application.routes.draw do
+	
+<<<<<<< HEAD
+	get "log_in" => "users#login", :as => "log_in"  
+	get "user_page" => "users#user_page", :as => "user_page"
+	get "log_out" => "users#logout", :as => "log_out"
+	get "sign_up" => "users#new", :as => "sign_up"  
+	resources :users do 
+	  
+ post 'process_login', :on => :collection 
+ end
+   
+
+=======
+>>>>>>> baf625bd0d85a75bb01d9792d742610b79684b57
+	resources :SeismicIndex do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
