@@ -99,6 +99,11 @@ class UsersController < ApplicationController
 	end
 
 	def admin
+    unless session[:user_id]
+      redirect_to '/'
+      return
+    end
+
 		@session_user = User.find(session[:user_id])
     unless @session_user.isadmin?
       redirect_to '/'

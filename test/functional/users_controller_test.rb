@@ -20,24 +20,26 @@ class UsersControllerTest < ActionController::TestCase
   end
 
  test "should get logout" do
+   # Written by Liam
     get :logout
     assert_response :redirect
   end
 
- test "logging out should set users id to nil" do 
+ test "logging out should set users id to nil" do
+   # Written by Liam
     get :logout
     assert_nil session[:user_id]
   end
-  
+
   test "Accessing user_page while signed out redirects to login" do
 	get :user_page									#Iain Macdonald
-	assert_response :redirect  
+	assert_response :redirect
   end
-  
+
   test "Non admins cannot access the admin page" do
 	get :admin										#Iain Macdonald
-  assert_response :redirect  
-end
+  assert_response :redirect
+  end
 
 
 end
