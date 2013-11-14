@@ -1,25 +1,29 @@
 <!-- By Iain Macdonald -->
-<div id="header">
-    <h1>Hello <%= @sessName %></h1>
-</div>
+<div id="userpage">
+    <div id="header">
+        <h1>Hello <%= @user.username %></h1>
+    </div>
 
-<div id="user-controls">
-    <% if @user %>
-        <span>Welcome back, <%= @user.username %></span>
-        <a href="user_page">Your profile</a>
-        <% if @user.isadmin? %>
-            / <a href="admin">Admin</a>
+    <div id="user-controls">
+        <% if @user %>
+            <span><%= @user.username %></span>
+            <a href="/user_page">Your profile</a>
+            <% if @user.isadmin? %>
+                / <a href="/admin">Admin</a>
+            <% end %>
+            /
+            <a href="/log_out">Log out</a>
+
+        <% else %>
+            <a href="/sign_up">Sign up</a>
+            /
+            <a href="/log_in">Log in</a>
         <% end %>
-        /
-        <a href="log_out">Log out</a>
+    </div>
 
-    <% else %>
-        <a href="sign_up">Sign up</a>
-        /
-        <a href="log_in">Log in</a>
-    <% end %>
+    <div class="user-area-text"> Here's your user area. You can do whatever you want with it!</div>
+
+    <br>
+    <a href="log_out"><button type='button'>Log out</button></a>
+    <a href="/"><button type='button'>Home</button></a>
 </div>
-
-<br>
-<a href="log_out"><button type='button'>Log out</button></a>
-<a href="/"><button type='button'>Home</button></a>

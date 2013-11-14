@@ -25,6 +25,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 
+    @session_user = User.find(session[:user_id])
 	end
 
 	def edit
@@ -41,15 +42,15 @@ class UsersController < ApplicationController
 		format.json { head :no_content }
 		end
 	end
-	
+
 	def update
 		@users = User.find(params[:id])
 		if @users.update_attributes(params[:isadmin])
 			redirect_to :isadmin => 'admin'
 	    end
     end
-	
-	
+
+
 	def login
 		user = User.authenticate(params[:username], params[:password])
 
@@ -82,7 +83,7 @@ class UsersController < ApplicationController
 
 		if session[:user_id] != nil
 
-			@sessName = User.find(session[:user_id]).username
+			@user = User.find(session[:user_id])
 
 		else
 

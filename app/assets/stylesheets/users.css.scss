@@ -1,3 +1,33 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#userpage {
+  #header {
+    width: 100%;
+    text-align: center;
+  }
+  #user-controls {
+    position: absolute;
+    text-align: right;
+    top: 0;
+    right: 0;
+  }
+  table {
+    width: 50%;
+    margin: 0 auto;
+  }
+  button {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+  form {
+    margin-left: 40%;
+  }
+  .user-area-text {
+    font-size: 150%;
+    text-align: center;
+  }
+}

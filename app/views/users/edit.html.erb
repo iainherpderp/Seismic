@@ -1,5 +1,25 @@
 <!--By Iain Macdonald-->
+<div id="header">
 <h1>Assign Privileges</h1>
+
+</div>
+
+<div id="user-controls">
+    <% if @user %>
+        <span><%= @user.username %></span>
+        <a href="/user_page">Your profile</a>
+        <% if @user.isadmin? %>
+            / <a href="/admin">Admin</a>
+        <% end %>
+        /
+        <a href="/log_out">Log out</a>
+
+    <% else %>
+        <a href="/sign_up">Sign up</a>
+        /
+        <a href="/log_in">Log in</a>
+    <% end %>
+</div>
 
 <%= form_for :user, url: '', method: :post do |f| %>
 

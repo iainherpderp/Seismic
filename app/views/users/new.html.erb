@@ -1,66 +1,69 @@
 <!-- By Iain Macdonald -->
-		
-		<div align="center">
+<div id="userpage">
+
+		<div id="header">
 			<h1>Sign Up for Seismic</h1>
 		</div>
-		
-		
-		<%= form_for @user do |f| %>  
 
-		<% if @user.errors.any? %>  
 
-			<div class="error_messages">  
+		<%= form_for @user do |f| %>
 
-			<h2>Form is invalid</h2>  
+		<% if @user.errors.any? %>
 
-			<ul>  
+			<div class="error_messages">
 
-			<% for message in @user.errors.full_messages %>  
+			<h2>Form is invalid</h2>
 
-				<li><%= message %></li>  
+			<ul>
 
-			<% end %>  
+			<% for message in @user.errors.full_messages %>
 
-			</ul>  
+				<li><%= message %></li>
 
-			</div>  
+			<% end %>
 
-		<% end %>  
-		
-		
-		
-		<p>  
+			</ul>
 
-			<%= f.label :"username:" %><br />  
+			</div>
 
-			<%= f.text_field :username %>  
+		<% end %>
+
+
+
+		<p>
+
+			<%= f.label :"username:" %><br />
+
+			<%= f.text_field :username %>
 
 		</p>
-		
+
 		<p>
-			<%= f.label :"email:" %><br />  
+			<%= f.label :"email:" %><br />
 
-			<%= f.text_field :email %>  
+			<%= f.text_field :email %>
 
-		</p>  
+		</p>
 
-		<p>  
+		<p>
 
-			<%= f.label :"password:" %><br />  
+			<%= f.label :"password:" %><br />
 
-			<%= f.password_field :password %>  
+			<%= f.password_field :password %>
 
-		</p>  
+		</p>
 
-		<p>  
+		<p>
 
 			<%= f.label :"password confirmation:" %>  <br />
 
-			<%= f.password_field :password_confirmation %>  
+			<%= f.password_field :password_confirmation %>
 
-		</p>  
+		</p>
 
 <p class="button"><%= f.submit %></p>
 
-<% end %>  
+<% end %>
 <a href="/"><button type='button'>Home</button></a>
+
+</div>

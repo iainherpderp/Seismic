@@ -1,3 +1,4 @@
+<!-- By Chris Coe -->
 <div id="top-wrap">
 
     <div id="header">
@@ -6,17 +7,17 @@
     <div id="user-controls">
         <% if @user %>
             <span>Welcome back, <%= @user.username %></span>
-            <a href="user_page">Your profile</a>
+            <a href="/user_page">Your profile</a>
             <% if @user.isadmin? %>
-                / <a href="admin">Admin</a>
+                / <a href="/admin">Admin</a>
             <% end %>
             /
-            <a href="log_out">Log out</a>
+            <a href="/log_out">Log out</a>
 
         <% else %>
-            <a href="sign_up">Sign up</a>
+            <a href="/sign_up">Sign up</a>
             /
-            <a href="log_in">Log in</a>
+            <a href="/log_in">Log in</a>
         <% end %>
     </div>
 

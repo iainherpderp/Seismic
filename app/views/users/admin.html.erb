@@ -1,13 +1,26 @@
 <!--By Iain Macdonald-->
+<div id="userpage">
 <div id="header">
-<div align="center">
     <h1>Hello <%= @session_user.username  %></h1>
     <h2>Welcome to the Admin page.</h2>
-
-</div>
 </div>
 
-<div align="center">
+    <div id="user-controls">
+        <% if @session_user %>
+            <span><%= @session_user.username %></span>
+            <a href="/user_page">Your profile</a>
+            <% if @session_user.isadmin? %>
+                / <a href="/admin">Admin</a>
+            <% end %>
+            /
+            <a href="/log_out">Log out</a>
+
+        <% else %>
+            <a href="/sign_up">Sign up</a>
+            /
+            <a href="/log_in">Log in</a>
+        <% end %>
+    </div>
 
 <table>
 	<thead>
@@ -36,12 +49,9 @@
 				<td><%= link_to 'Make Admin', edit_user_path(user) %></td>
 				<td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			<% end %>
-  </tr>
-<% end %>
+      </tr>
+    <% end %>
 </table>
-</table>
-<br />
-<br />
 
 <a href="/"><button type='button'>Home</button></a>
 </div>

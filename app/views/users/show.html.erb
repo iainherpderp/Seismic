@@ -1,24 +1,57 @@
 <!-- By Iain Macdonald -->
-<p>
- <strong>User:</strong>
 
-  <%= @user.username %>
-</p>
+<div id="userpage">
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email%>
-</p>
+    <div id="header">
+        <h1>
+            User details
+        </h1>
+    </div>
 
- <p>
- <strong>Admin?:</strong>
 
-<% if @user.isadmin? %>
-	Yes
-<% else %>
-	No
-<% end %>
-</p>
+    <div id="user-controls">
+        <% if @session_user %>
+            <span>Welcome back, <%= @session_user.username %></span>
+            <a href="/user_page">Your profile</a>
+            <% if @session_user.isadmin? %>
+                / <a href="/admin">Admin</a>
+            <% end %>
+            /
+            <a href="/log_out">Log out</a>
+
+        <% else %>
+            <a href="/sign_up">Sign up</a>
+            /
+            <a href="/log_in">Log in</a>
+        <% end %>
+    </div>
+<table>
+    <tr>
+        <th>User:</th>
+        <td>
+            <%= @user.username %>
+        </td>
+    </tr>
+    <tr>
+        <th>Email:</th>
+        <td>
+            <%= @user.email%>
+        </td>
+    </tr>
+    <tr>
+        <th>Is an Admin?</th>
+        <td>
+            <% if @user.isadmin? %>
+                Yes
+            <% else %>
+                No
+            <% end %>
+            </p>
+        </td>
+    </tr>
+</table>
 
 <a href="/admin"><button type='button'>Back to Admin Page</button></a>
 <a href="/"><button type='button'>Home</button></a>
+
+</div>
