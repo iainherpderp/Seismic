@@ -1,10 +1,10 @@
-<h1>Editing post</h1>
+<h1>Assign Privileges</h1>
  
 <%= form_for :user, url: admin_path, method: :post do |f| %>
 
 <br />
 
-<% if @user.isadmin? %>
+<% if @user.isadmin %>
 	<p>
 		You may not edit admins.
 	</p>

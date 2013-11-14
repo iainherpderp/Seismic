@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :email, email_format: {message: "please enter a valid e-mail address!"}
   
 	def isadmin
-		username == "IainAdmin"
+		username == "IainAdmin" || :isadmin=="true"
 	end
 
 	def encrypt_password
