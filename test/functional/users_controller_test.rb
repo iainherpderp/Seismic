@@ -30,5 +30,4 @@ class UsersControllerTest < ActionController::TestCase
     assert_nil session[:user_id]
  end
 
-  test ""
 end

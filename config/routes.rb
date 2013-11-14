@@ -11,9 +11,9 @@ Seismic::Application.routes.draw do
   get "log_out" => "users#logout", :as => "log_out"
   get "sign_up" => "users#new", :as => "sign_up"
   get "admin" => "users#admin", :as => "admin"
-  post '/admin', to: 'users#admin'
-  
-resources :users do
+  post '/users/:id/edit', to: 'users#setadmin'
+
+  resources :users do
 	post 'process_login', :on => :collection
 	end
 

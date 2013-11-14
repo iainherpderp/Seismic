@@ -89,15 +89,29 @@ class UsersController < ApplicationController
 	end
 
 	def admin
+		@session_user = User.find(session[:user_id])
+    unless @session_user.isadmin?
+      redirect_to '/'
+    end
 
-		@sessName = User.find(session[:user_id]).username
+    @users = User.all
+  end
 
-		@users = User.all
+  def setadmin
+    @session_user = User.find(session[:user_id])
+    unless @session_user.isadmin?
+      redirect_to '/'
+    end
 
-		respond_to do |format|
-		format.html
-		format.json { render json: @users }
-		end
-	end
+    if params[:user['isadmin']] == '1'
+      set = 1
+    else
+      set = 0
+    end
 
+    @user = User.find(params[:id])
+    @user.update_attribute('isadmin', set);
+
+    redirect_to '/admin'
+  end
 end

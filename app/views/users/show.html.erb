@@ -1,9 +1,9 @@
  <p>
  <strong>User:</strong>
-  
+
   <%= @user.username %>
 </p>
- 
+
 <p>
   <strong>Email:</strong>
   <%= @user.email%>
@@ -11,8 +11,8 @@
 
  <p>
  <strong>Admin?:</strong>
-  
-<% if @user.isadmin %>
+
+<% if @user.isadmin? %>
 	Yes
 <% else %>
 	No
