@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     
 		else 
    
-			render "log_in"  
+			render "login"  
    
 		end  
 
