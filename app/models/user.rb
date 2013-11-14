@@ -1,3 +1,5 @@
+#By Iain Macdonald (Minus final version of def isadmin)
+
 class User < ActiveRecord::Base
 
   attr_accessible :username, :email, :password_hash, :password_salt, :password, :password_confirmation, :isadmin, :default => false
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
   validates :email, email_format: {message: "please enter a valid e-mail address!"}
   
 	def isadmin
-		username == "IainAdmin" || :isadmin=="true"
+		username == "IainAdmin"
 	end
 
 	def encrypt_password

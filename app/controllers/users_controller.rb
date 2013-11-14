@@ -1,3 +1,5 @@
+#By Iain Macdonald
+
 class UsersController < ApplicationController
 	
 	before_filter :login_required, :only => :user_page
@@ -37,7 +39,14 @@ class UsersController < ApplicationController
 		format.html { redirect_to admin_url }
 		format.json { head :no_content }
 		end
+	end
+	
+	def update
+		@users = User.find(params[:id])
+		if @users.update_attributes(params[:isadmin])
+			redirect_to :isadmin => 'admin'
 		end
+      end
 	
 	
 	def login
@@ -88,15 +97,24 @@ class UsersController < ApplicationController
 	end
 	
 	def admin
-
-		@sessName = User.find(session[:user_id]).username
 		
-		@users = User.all
+		if session[:user_id] != nil
+			@user = User.find(session[:user_id])
+			if @user.isadmin
+		
+				@sessName = User.find(session[:user_id]).username
+		
+				@users = User.all
 
-		respond_to do |format|
-		format.html
-		format.json { render json: @users }
+				respond_to do |format|
+				format.html
+				format.json { render json: @users }
+				end
+			else 
+					redirect_to '/'
+			end
+		else
+			redirect_to '/'
 		end
 	end
-	  
 end
