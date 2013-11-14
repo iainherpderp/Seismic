@@ -1,9 +1,9 @@
 <!--By Iain Macdonald-->
 <div id="header">
 <div align="center">
-    <h1>Hello <%= @sessName  %></h1>
+    <h1>Hello <%= @session_user.username  %></h1>
     <h2>Welcome to the Admin page.</h2>
-    
+
 </div>
 </div>
 
@@ -17,19 +17,19 @@
 			<th>Admin?</th>
 		</tr>
 	</thead>
-	
+
 	<% @users.each do |user| %>
 		<tr>
 			<td><%= user.username %></td>
 			<td><%= user.email %></td>
 			<td>
-			<% if user.isadmin %>
+			<% if user.isadmin? %>
 				Yes
 			<% else %>
 				No
 			<% end %>
 			</td>
-			<% if user.isadmin%>
+			<% if user.isadmin? %>
 				<td><%= link_to 'Show', user %></td>
 			<% else %>
 				<td><%= link_to 'Show', user %></td>

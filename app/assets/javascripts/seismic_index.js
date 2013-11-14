@@ -1,5 +1,4 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+// All written by Chris
 
 // Set global variable for map.
 // Global scope required to update from timeout.

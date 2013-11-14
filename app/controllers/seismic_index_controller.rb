@@ -2,6 +2,8 @@ class SeismicIndexController < ApplicationController
   require 'open-uri'
 
 def index
+  # Written by Liam
+  # Refactored by Chris
     @quake_data = getEarthquakes(params[:duration], params[:intensity])
     @latest_quake = if @quake_data && @quake_data['metadata']['count'] != 0 && @quake_data['features'].any?
                       @quake_data['features'][0]
@@ -16,11 +18,16 @@ def index
   end
 
   def json
+    # Written by Chris
     @quake_data = getEarthquakes(params[:duration], params[:intensity])
     render json: @quake_data
   end
 
   def getEarthquakes(duration, intensity)
+    # USGS Data Feed retrieval
+    # Written by Liam
+    # Refactored by Chris
+
     # Default values
     duration ||= 'day'
     intensity ||= 'all'

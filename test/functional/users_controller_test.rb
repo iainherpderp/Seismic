@@ -2,16 +2,19 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   test "should get new" do
+    # Written by Liam
     get :new
     assert_response :success
   end
 
   test "should get create" do
+    # Written by Liam
     get :create
     assert_response :success
   end
 
   test "should get login" do
+    # Written by Liam
     get :login
     assert_response :success
   end
@@ -26,14 +29,14 @@ class UsersControllerTest < ActionController::TestCase
     assert_nil session[:user_id]
   end
   
-   test "Accessing user_page while signed out redirects to login" do
+  test "Accessing user_page while signed out redirects to login" do
 	get :user_page									#Iain Macdonald
 	assert_response :redirect  
-end
+  end
   
   test "Non admins cannot access the admin page" do
 	get :admin										#Iain Macdonald
-	assert_response :redirect  
+  assert_response :redirect  
 end
 
 

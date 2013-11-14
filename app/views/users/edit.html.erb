@@ -1,19 +1,18 @@
 <!--By Iain Macdonald-->
 <h1>Assign Privileges</h1>
- 
-<%= form_for :user, url: admin_path, method: :post do |f| %>
+
+<%= form_for :user, url: '', method: :post do |f| %>
 
 <br />
 
-<% if @user.isadmin %>
+    <% unless @current_admin.isadmin? %>
 	<p>
 		You may not edit admins.
 	</p>
-	
 	<% else %>
-	
-		<p><%= f.radio_button :isadmin, "false" %> Not admin.</p>
-		<p><%= f.radio_button :isadmin, "true" %>Make this user an admin.</p>
+
+		<p><%= f.radio_button :isadmin, "0" %> Not admin.</p>
+		<p><%= f.radio_button :isadmin, "1" %>Make this user an admin.</p>
 		<p>You may not remove an admin once they have been set.</p>
 	<% end %>
 
@@ -21,5 +20,5 @@
     <%= f.submit %>
   </p>
 <% end %>
- 
+
 <%= link_to 'Back', admin_path %>

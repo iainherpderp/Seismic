@@ -1,4 +1,4 @@
-#By Iain Macdonald (Minus final version of def isadmin)
+#By Iain Macdonald (Minus final version of def isadmin, by Chris)
 
 class User < ActiveRecord::Base
 
@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   validates :email, email_format: {message: "please enter a valid e-mail address!"}
-  
-	def isadmin
-		username == "IainAdmin"
+
+	def isadmin?
+    	self[:isadmin] || self[:username] == 'chris' # Or whomever your site admin is!
 	end
 
 	def encrypt_password

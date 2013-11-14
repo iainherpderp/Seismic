@@ -7,11 +7,15 @@
         <% if @user %>
             <span>Welcome back, <%= @user.username %></span>
             <a href="user_page">Your profile</a>
-            <% if @user.isadmin %>
+            <% if @user.isadmin? %>
                 / <a href="admin">Admin</a>
             <% end %>
+            /
+            <a href="log_out">Log out</a>
+
         <% else %>
             <a href="sign_up">Sign up</a>
+            /
             <a href="log_in">Log in</a>
         <% end %>
     </div>
