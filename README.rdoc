@@ -1,3 +1,13 @@
 == Welcome to Seismic
 
-Here is the documentation for seismic!
+An app for displaying recent earthquakes, using data from the USGS.
+
+== How to use
+
+The main page consists of a table displaying the relevant earthquakes and a google maps canvas.  The canvas will initially center on the latest earthquake detected. However, all relevant quakes are also marked with icons. Hovering over time field of an earthquake in the table will display the exact time of the event. Clicking any of the table rows will scroll the window down to the map and update it to center on that quake.
+
+Filters, for the earthquake data and an auto-update option can be found on the upper right hand side of the table. Changing these options will update the page immediately with the new appropriate information.  Clicking auto-update will toggle the auto-update function on and off, this function automatically updates the page every 30 seconds.
+
+Links for signing up or logging in are at the top right of the page also.  Clicking sign up will take you to a sign up page where you can sign up.  After signing up you will be directed to the login page here you can login using the credentials you provided.
+
+Logging in will take you to the user page, here you can log out or navigate back to the main page.. If you have admin status you will be provided with added options on the user page. Admins can view a list of users and their email addresses (perfect for a mailing list). Admins also have the option to elevate other users to admin status.
