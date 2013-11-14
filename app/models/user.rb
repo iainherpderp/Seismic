@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   validates :email, email_format: {message: "please enter a valid e-mail address!"}
-  
-	def isadmin
-		username == "IainAdmin"
+
+	def isadmin?
+    #self.isadmin || self.username == 'chris'
+    true
 	end
 
 	def encrypt_password
