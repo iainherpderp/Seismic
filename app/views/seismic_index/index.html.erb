@@ -7,7 +7,7 @@
         <% if @user %>
             <span>Welcome back, <%= @user.username %></span>
             <a href="user_page">Your profile</a>
-            <% if @user.isadmin/ %>
+            <% if @user.isadmin %>
                 / <a href="admin">Admin</a>
             <% end %>
         <% else %>
@@ -26,12 +26,8 @@
             <span>
                 <a
                     id="duration-<%= duration %>"
-<<<<<<< HEAD
-                    class="<%= if (params[:duration] == duration || params[:duration].nil? && duration == 'hour') then
-=======
                     data-duration="<%= duration %>"
                     class="<%= if (params[:duration] == duration || params[:duration].nil? && duration == 'day') then
->>>>>>> c56a4a1a063294a44290f9d4ac08432efbd70b66
                                   'active'
                                 end %>"
                      href="?duration=<%= duration %><%= if params[:intensity] then
