@@ -23,15 +23,19 @@
 			<td><%= user.username %></td>
 			<td><%= user.email %></td>
 			<td>
-			<% if user.isadmin = TRUE%>
+			<% if user.isadmin %>
 				Yes
 			<% else %>
 				No
 			<% end %>
 			</td>
-			<td><%= link_to 'Show', user %></td>
-			<td><%= link_to 'Edit', edit_user_path(user) %></td>
-			<td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<% if user.isadmin%>
+				<td><%= link_to 'Show', user %></td>
+			<% else %>
+				<td><%= link_to 'Show', user %></td>
+				<td><%= link_to 'Edit', edit_user_path(user) %></td>
+				<td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<% end %>
   </tr>
 <% end %>
 </table>

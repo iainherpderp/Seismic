@@ -1,25 +1,20 @@
 <h1>Editing post</h1>
  
-<%= form_for :user, url: admin_path, method: :get do |f| %>
-  <% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited
-      this post from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
- 
-  <p>
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </p>
-  
-		<h4> Click to Switch On/Off Admin  
-		<%= check_box_tag(:isadmin) %></h4>
+<%= form_for :user, url: admin_path, method: :put do |f| %>
+
+<br />
+
+<% if @user.isadmin? %>
+	<p>
+		You may not edit admins.
+	</p>
+	
+	<% else %>
+	
+		<p><%= f.radio_button :isadmin, "false" %> Not admin.</p>
+		<p><%= f.radio_button :isadmin, "true" %>Make this user an admin.</p>
+		<p>You may not remove an admin once they have been set.</p>
+	<% end %>
 
   <p>
     <%= f.submit %>

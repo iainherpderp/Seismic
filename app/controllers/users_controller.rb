@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     
 		else 
    
-			render "login"  
+			render "log_in"  
    
 		end  
 
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
 		respond_to do |format|
 		format.html
 		format.json { render json: @users }
+		end
 	end
-  end
 	  
 end

@@ -7,7 +7,7 @@
         <% if @user %>
             <span>Welcome back, <%= @user.username %></span>
             <a href="user_page">Your profile</a>
-            <% if @user.isadmin? %>
+            <% if @user.isadmin %>
                 / <a href="admin">Admin</a>
             <% end %>
         <% else %>
