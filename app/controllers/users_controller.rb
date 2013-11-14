@@ -103,14 +103,8 @@ class UsersController < ApplicationController
       redirect_to '/'
     end
 
-    if params[:user['isadmin']] == '1'
-      set = 1
-    else
-      set = 0
-    end
-
     @user = User.find(params[:id])
-    @user.update_attribute('isadmin', set);
+    @user.update_column(:isadmin, params['user']['isadmin'])
 
     redirect_to '/admin'
   end
