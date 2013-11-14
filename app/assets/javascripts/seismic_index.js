@@ -69,8 +69,8 @@ function updateEarthquakes(quakeData) {
 
 function rowClick() {
     var loc = new google.maps.LatLng($(this).data('coords')[1], $(this).data('coords')[0]);
-    map.panTo(loc); 
-    window.location.hash = "map-wrap";
+    SEISMIC.map.panTo(loc);
+    window.location = "#map-wrap";
 }
 
 function toggleAutoUpdate() {

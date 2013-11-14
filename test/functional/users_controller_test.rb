@@ -18,7 +18,7 @@ class UsersControllerTest < ActionController::TestCase
 
  test "should get logout" do
     get :logout
-    assert_response :success
+    assert_response :redirect
   end
 
  test "logging out should set users id to nil" do

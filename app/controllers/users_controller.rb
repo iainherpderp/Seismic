@@ -13,15 +13,41 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])  
       
 		if @user.save  
-			redirect_to :user_page, :notice => "Signed up!"  
+			redirect_to :user_page
 		else  
 			render "new"  
 			
 		end  
 	end 
 	
-	def login
+	def show
+		@user = User.find(params[:id])
+		
+	end
+	
+	def edit
+		@user = User.find(params[:id])
+	end
+	
+	  def destroy
+		@user = User.find(params[:id])
+		@user.destroy
 
+		respond_to do |format|
+		format.html { redirect_to admin_url }
+		format.json { head :no_content }
+		end
+		end
+	
+	
+	def login
+		user = User.authenticate(params[:username], params[:password])
+		
+		if session[:user_id] != nil
+			
+			redirect_to :user_page
+		end
+			
 	end
 	
 	
@@ -34,9 +60,7 @@ class UsersController < ApplicationController
     
 			redirect_to :user_page, :notice => "Logged in!"  
     
-		else  
-   
-			flash.now.alert = "Invalid username, email or password"  
+		else 
    
 			render "login"  
    
@@ -64,7 +88,15 @@ class UsersController < ApplicationController
 	end
 	
 	def admin
+
 		@sessName = User.find(session[:user_id]).username
+		
+		@users = User.all
+
+		respond_to do |format|
+		format.html
+		format.json { render json: @users }
+		end
 	end
 	  
 end
