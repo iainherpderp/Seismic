@@ -51,7 +51,10 @@ body {
         margin: 0;
       }
       @include respond-to(small) {
-        margin-top: 1.5em;
+        padding-top: 1.5em;
+      }
+      @include respond-to(medium) {
+        padding-top: 2em;
       }
     }
 
